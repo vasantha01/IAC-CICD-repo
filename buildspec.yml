@@ -14,5 +14,5 @@ phases:
         aws s3 cp $file s3://s3bucket-poc1/nestedmain.json
         aws codepipeline start-pipeline-execution --name codepipeline-iac-deployment
         else
-        echo "Paa" 
+        echo "Paaa" 
         fi
