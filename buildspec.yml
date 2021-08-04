@@ -9,10 +9,10 @@ phases:
         git version
         file=`git show --pretty="format:" --name-only $CODEBUILD_RESOLVED_SOURCE_VERSION`
         echo "$file"
-        if [ "$file" == "compaction/test.txt" ]
+        if [ "$file" == "IAC-stacks/nestedmain.json" ]
         then
-        aws s3 cp $file s3://codepipeline-artifacts-bucket1/compaction/test.txt
-        aws codepipeline start-pipeline-execution --name code-pipelinepoc
+        aws s3 cp $file s3://codepipeline-artifacts-bucket1/IAC-stacks/nestedmain.json
+        aws codepipeline start-pipeline-execution --name code-pipelinepoc1
         else
         echo "Popat" 
         fi
