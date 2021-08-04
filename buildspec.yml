@@ -14,5 +14,5 @@ phases:
         aws s3 cp $file s3://iac-source-artifact1/*
         aws codepipeline start-pipeline-execution --name codepipeline-iac-deployment
         else
-        echo "Popat" 
+        echo "Popaqt" 
         fi
