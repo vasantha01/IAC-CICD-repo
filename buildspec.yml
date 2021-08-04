@@ -11,8 +11,8 @@ phases:
         echo "$file"
         if [ "$file" == "IAC-stacks/nestedmain.json" ]
         then
-        aws s3 cp $file s3://codepipeline-artifacts-bucket1/IAC-stacks/nestedmain.json
-        aws codepipeline start-pipeline-execution --name code-pipelinepoc1
+        aws s3 cp $file s3://iac-source-artifact1/*
+        aws codepipeline start-pipeline-execution --name codepipeline-iac-deployment
         else
         echo "Popat" 
         fi
