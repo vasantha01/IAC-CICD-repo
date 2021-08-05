@@ -5,13 +5,13 @@
       "child-s3" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Properties" : {
-          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/child-s3.json"
+          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/childs3.json"
         }
      },
       "child-sns" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Properties" : {
-          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/child-sns.json"
+          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/childsns.json"
         }
       }
     }
