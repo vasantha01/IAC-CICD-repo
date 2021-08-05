@@ -5,13 +5,13 @@
       "s3" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Properties" : {
-          "TemplateURL" : "https://github.com/vasantha01/IAC-CICD-repo/blob/main/nestedstacks/s3.json"
+          "TemplateURL" : "https://capsiachildbucket.s3.amazonaws.com/TEMPLATE_PREFIX/s3.json"
         }
      },
       "sns" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Properties" : {
-          "TemplateURL" : "https://github.com/vasantha01/IAC-CICD-repo/blob/main/nestedstacks/sns.json"
+          "TemplateURL" : "https://capsiachildbucket.s3.amazonaws.com/TEMPLATE_PREFIX/sns.json"
         }
       }
     }
