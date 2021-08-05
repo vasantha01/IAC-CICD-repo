@@ -1,0 +1,52 @@
+version: 0.1
+
+environment_variables:
+  plaintext:
+    CHILD_TEMPLATES: |
+      sns.json
+      s3.json
+    TEMPLATE_FILES: |
+      rootstack.json
+phases:
+  install:
+    commands:
+      npm install jsonlint -g
+  pre_build:
+    commands:
+      - echo "Validating CFN templates"
+      - |
+        for cfn_template in $TEMPLATE_FILES; do
+          echo "Validating CloudFormation template file $cfn_template"
+          aws cloudformation validate-template --template-body file://$cfn_template
+        done
+      - |
+        for conf in $CONFIG_FILES; do
+          echo "Validating CFN parameters config file $conf"
+          jsonlint -q $conf
+        done
+  build:
+    commands:
+      - echo "Copying child stack templates to S3"
+      - |
+        for child_template in $CHILD_TEMPLATES; do
+          if [ "X$TEMPLATE_PREFIX" = "X" ]; then
+            aws s3 cp "$child_template" "s3://$capsiachildbucket/$child_template"
+          else
+            aws s3 cp "$child_template" "s3://$capsiachildbucket/$TEMPLATE_PREFIX/$child_template"
+          fi
+        done
+      - echo "Updating template configurtion files to use the appropriate values"
+      - |
+        for conf in $CONFIG_FILES; do
+          if [ "X$TEMPLATE_PREFIX" = "X" ]; then
+            echo "Replacing \"TEMPLATE_PATH_PLACEHOLDER\" for \"$capsiachildbucket\" in $conf"
+            sed -i -e "s/TEMPLATE_PATH_PLACEHOLDER/$capsiachildbucket/" $conf
+          else
+            echo "Replacing \"TEMPLATE_PATH_PLACEHOLDER\" for \"$capsiachildbucket/$TEMPLATE_PREFIX\" in $conf"
+            sed -i -e "s/TEMPLATE_PATH_PLACEHOLDER/$capsiachildbucket\/$TEMPLATE_PREFIX/" $conf
+          fi
+        done
+
+artifacts:
+  files:
+    - rootstack.json
