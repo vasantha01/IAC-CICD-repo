@@ -1,0 +1,17 @@
+{
+  "AWSTemplateFormatVersion" : "2010-09-09",
+  "Resources" : {
+      "s3" : {
+      "Type" : "AWS::CloudFormation::Stack",
+      "Properties" : {
+          "TemplateURL" : "https://capsiachildbucket.s3.amazonaws.com/TEMPLATE_PREFIX/s3.json"
+        }
+     },
+      "sns" : {
+      "Type" : "AWS::CloudFormation::Stack",
+      "Properties" : {
+          "TemplateURL" : "https://capsiachildbucket.s3.amazonaws.com/TEMPLATE_PREFIX/sns.json"
+        }
+      }
+    }
+}
