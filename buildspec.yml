@@ -1,11 +1,20 @@
 version: 0.2
-env:
-    git-credential-helper: yes 
-phases:  
+environment_variables: 
+  plaintext: 
+    CHILD_TEMPLATES: |
+        sns.json
+        s3.json
+phases:
   build:
-    commands: | 
-        git version
-        aws s3 cp cfn-nested/* s3://code-build-input-bucket1/
-        aws codepipeline start-pipeline-execution --name Iac-pipeline
-        echo "cicd" 
+    commands:
+      - echo "Copying child stack templates toS3"
+       - |
+        file = "CHILD_TEMPLATES"
+        if [ "$file" == "cfn-nested/*" ]
+        then
+              aws s3 cp $file code-build-input-bucket1/*"
+              aws codepipeline start-pipeline-execution --name IAC-code-pipeline
+        else
+        echo "demo on cid" 
+        fi
         
