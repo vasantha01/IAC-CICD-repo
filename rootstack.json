@@ -5,13 +5,13 @@
       "s3" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Properties" : {
-          "TemplateURL" : "https://github.com/vasantha01/IAC-CICD-repo/blob/main/sns.json"
+          "TemplateURL" : ""
         }
      },
       "sns" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Properties" : {
-          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
+          "TemplateURL" : "https://github.com/vasantha01/IAC-CICD-repo/blob/main/sns.jsonn"
         }
       }
     }
