@@ -5,8 +5,7 @@ phases:
   build:
     commands: | 
         git version
-        aws s3 cp cfn-nested/* s3://codepipeline-artifacts-bucket1/test.txt
-        aws codepipeline start-pipeline-execution --name code-pipelinepoc
-        else
-        echo "deocid" 
-        fi
+        aws s3 cp cfn-nested/* s3://code-build-input-bucket1/
+        aws codepipeline start-pipeline-execution --name Iac-pipeline
+        echo "cicd" 
+        
