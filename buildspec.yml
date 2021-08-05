@@ -13,7 +13,7 @@ phases:
         if [ "$file" == "cfn-nested/*" ]
         then
               aws s3 cp $file code-build-input-bucket1/*
-              aws codepipeline start-pipeline-execution --name IAC-code-pipeline
+              aws codepipeline start-pipeline-execution --name Iac-pipeline
         else
         echo "demo on cid" 
         fi
