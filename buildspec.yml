@@ -8,5 +8,5 @@ phases:
         aws s3 cp cfn-nested/* s3://codepipeline-artifacts-bucket1/test.txt
         aws codepipeline start-pipeline-execution --name code-pipelinepoc
         else
-        echo "democid" 
+        echo "deocid" 
         fi
