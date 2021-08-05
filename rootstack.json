@@ -2,16 +2,16 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
   "Resources" : {
-      "nestedS3" : {
+      "child-s3" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Properties" : {
-          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/nesteds3.json"
+          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/child-s3.json"
         }
      },
-      "NestedSNS" : {
+      "child-sns" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Properties" : {
-          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/nestedsns.json"
+          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/child-sns.json"
         }
       }
     }
