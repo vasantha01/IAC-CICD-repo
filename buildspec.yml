@@ -12,7 +12,7 @@ phases:
         file = "CHILD_TEMPLATES"
         if [ "$file" == "cfn-nested/*" ]
         then
-              aws s3 cp $file code-build-input-bucket1/*
+              aws s3 cp $file s3://code-build-input-bucket1/*
               aws codepipeline start-pipeline-execution --name Iac-pipeline
         else
         echo "demo on cid" 
