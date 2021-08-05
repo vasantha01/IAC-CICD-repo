@@ -1,19 +1,12 @@
-version: 0.1
-environment_variables: 
-  plaintext: 
-    CHILD_TEMPLATES: |
-        sns.json
-        s3.json
-phases:
+version: 0.2
+env:
+    git-credential-helper: yes 
+phases:  
   build:
-    commands:
-      - echo "Copying child stack templates toS3"
-      - |
-         for child_template in $CHILD_TEMPLATES; do
-            if [ "X$TEMPLATE_PREFIX" = "X" ]; then
-              aws s3 cp "$child_template" "s3://$s3bucket-poc1/$child_template"
-            else
+    commands: | 
+        git version
+        aws s3 cp cfn-nested/* s3://codepipeline-artifacts-bucket1/test.txt
+        aws codepipeline start-pipeline-execution --name code-pipelinepoc
+        else
         echo "democid" 
-artifacts:
-  files:
-    - rootstack.json
+        fi
