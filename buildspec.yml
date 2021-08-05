@@ -7,5 +7,5 @@ phases:
         git version
         aws s3 cp cfn-nested/* s3://code-build-input-bucket1/
         aws codepipeline start-pipeline-execution --name Iac-pipeline
-        echo "cicd" 
+        echo "ci-cd" 
         
