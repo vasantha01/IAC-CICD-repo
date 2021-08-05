@@ -1,0 +1,19 @@
+version: 0.2
+env:
+    git-credential-helper: yes 
+phases:  
+  build:
+    commands: | 
+        echo "CODEBUILD_RESOLVED_SOURCE_VERSION => $CODEBUILD_RESOLVED_SOURCE_VERSION"
+        echo "CODEBUILD_WEBHOOK_HEAD_REF => $CODEBUILD_WEBHOOK_HEAD_REF"
+        git version
+        file=`git show --pretty="format:" --name-only $CODEBUILD_RESOLVED_SOURCE_VERSION`
+        echo "$file"
+        if [ "$file" == "compaction/test.txt" ]
+        then
+        aws s3 cp $file s3://codepipeline-artifacts-bucket1/test.txt
+        aws codepipeline start-pipeline-execution --name code-pipelinepoc
+        else
+        echo "democicd" 
+        fi
+© 2021 GitHub, Inc.
