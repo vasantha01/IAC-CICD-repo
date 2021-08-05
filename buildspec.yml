@@ -26,7 +26,7 @@ phases:
         done
   build:
     commands:
-      - echo "Copying child stack templates to S3"
+      - echo "Copying child stack templates toS3"
       - |
         for child_template in $CHILD_TEMPLATES; do
           if [ "X$TEMPLATE_PREFIX" = "X" ]; then
