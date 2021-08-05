@@ -2,16 +2,16 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
   "Resources" : {
-      "child-s3" : {
+      "s3" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Properties" : {
-          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/childs3.json"
+          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/s3.json"
         }
      },
-      "child-sns" : {
+      "sns" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Properties" : {
-          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/childsns.json"
+          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
         }
       }
     }
