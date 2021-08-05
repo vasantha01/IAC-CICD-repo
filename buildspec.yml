@@ -1,16 +1,19 @@
 version: 0.1
+environment_variables: 
+  plaintext: 
+    CHILD_TEMPLATES: |
+        sns.json
+        s3.json
 phases:
   build:
     commands:
       - echo "Copying child stack templates toS3"
       - |
-        for child_template in $CHILD_TEMPLATES; do
-          if [ "X$TEMPLATE_PREFIX" = "X" ]; then
-            aws s3 cp "$child_template" "s3://$capsiachildbucket/$child_template"
-          else
-            aws s3 cp "$child_template" "s3://$capsiachildbucket/$TEMPLATE_PREFIX/$child_template"
-          fi
-        done
+         for child_template in $CHILD_TEMPLATES; do
+            if [ "X$TEMPLATE_PREFIX" = "X" ]; then
+              aws s3 cp "$child_template" "s3://$s3bucket-poc1/$child_template"
+            else
+        echo "democid" 
 artifacts:
   files:
     - rootstack.json
