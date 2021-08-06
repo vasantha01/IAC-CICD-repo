@@ -5,5 +5,5 @@ phases:
     commands: |
         aws s3 cp cfn-nested s3://s3bucket-poc1/ --recursive --include "*.json"
         aws codepipeline start-pipeline-execution --name Iac-pipeline-new
-        echo "copy child stack templates too s3 "
+        echo "copy child stack templates to s3 "
       
