@@ -1,12 +1,6 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
-  "Parameters" : 
-  {
-    "s3version" :""
-    ""
-  }
-  
-  "Resources" : {
+   "Resources" : {
       "s3" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Properties" : {
