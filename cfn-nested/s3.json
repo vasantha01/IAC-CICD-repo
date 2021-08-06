@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "bucketcicd-caspia"
+    "Description": "bucketcicd-caspia",
     "Parameters": {
         "bucketcicd": {
             "Type": "String",
