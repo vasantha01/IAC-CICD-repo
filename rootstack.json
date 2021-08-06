@@ -1,11 +1,16 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
+  "Parameters" : 
+  {
+    "s3version" :""
+    ""
+  }
+  
   "Resources" : {
       "s3" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Properties" : {
-          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/s3.json"
-        }
+          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/s3.json
      },
       "sns" : {
       "Type" : "AWS::CloudFormation::Stack",
