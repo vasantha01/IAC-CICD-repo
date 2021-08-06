@@ -3,7 +3,7 @@ version: 0.1
 phases:
   build:
     commands: |
-        aws s3 cp cfn-nested s3://s3bucket-poc1
+        aws s3 cp s3.json s3://s3bucket-poc1
         aws codepipeline start-pipeline-execution --name Iac-pipeline-new
         echo "copy child stack templates too  s3 "
       
