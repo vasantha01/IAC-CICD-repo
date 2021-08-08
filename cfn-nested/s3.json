@@ -48,7 +48,7 @@
         }
     },
     "Outputs": {
-        "CompactionBucket": {
+        "SharedValueOutput": {
             "Value": {
                 "Ref": "S3CompactionBucket"
             }
