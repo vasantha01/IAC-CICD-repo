@@ -11,18 +11,18 @@
                     "Value": {
                         "Ref": "S3CompactionBucket"
                     },
-                    "OutputFromNestedSatck"
-                    "Value": {
-                        "Ref": "S3CompactionBucket.Outputs.BucketName"
-                    },
-
+                    "OutputFromNestedSatck": {
+                        "Value": {
+                            "Ref": "S3CompactionBucket.Outputs.BucketName"
+                        }
+                    }
                 }
-            }
-        },
-        "sns": {
-            "Type": "AWS::CloudFormation::Stack",
-            "Properties": {
-                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
+            },
+            "sns": {
+                "Type": "AWS::CloudFormation::Stack",
+                "Properties": {
+                    "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
+                }
             }
         }
     }
