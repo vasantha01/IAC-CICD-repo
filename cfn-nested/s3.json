@@ -47,11 +47,10 @@
             }
         }
     },
-    "Outputs": {
+       "Outputs": {
         "SharedValueOutput": {
-            "Value": {
-                "Ref": "S3CompactionBucket"
-            }
+            "Value": "yourValue",
+            "Description": "You can refer to any resource from the template."
         }
     }
 }
