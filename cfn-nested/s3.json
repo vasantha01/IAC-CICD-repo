@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "S3-Core-Prsm-BucketCreation",
+    "Description": "S3-Core-Caspia-BucketCreation",
     "Parameters": {
         "CompactionBucket": {
             "Type": "String",
