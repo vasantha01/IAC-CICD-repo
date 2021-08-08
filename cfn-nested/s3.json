@@ -47,10 +47,12 @@
             }
         }
     },
-       "Outputs": {
-        "SharedValueOutput": {
-            "Value": "yourValue",
-            "Description": "You can refer to any resource from the template."
+    "Outputs": {
+        "BucketName": {
+            "Value": {
+                "Ref": "CompactionBucket"
+            }
         }
     }
 }
+
