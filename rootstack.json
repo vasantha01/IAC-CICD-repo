@@ -4,15 +4,19 @@
         "S3CompactionBucket": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
-                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json",
-                "Parameters": {
-                "SharedValueParameter": {
-                 "Fn::GetAtt": [
-                 "S3CompactionBucket",
-                 "Outputs.SharedValueOutput"
-            ]
-          }
-        }
+                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json"
+            },
+            "Outputs": {
+                "Stackref": {
+                    "Value": {
+                        "Ref": "S3CompactionBucket"
+                    },
+                    "OutputFromNestedSatck"
+                    "Value": {
+                        "Ref": "S3CompactionBucket.Outputs.BucketName"
+                    },
+
+                }
             }
         },
         "sns": {
@@ -23,3 +27,4 @@
         }
     }
 }
+
