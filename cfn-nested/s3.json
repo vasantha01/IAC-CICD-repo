@@ -37,7 +37,7 @@
                 "Tags": [
                     {
                         "Key": "glb-core-env",
-                        "Value": "compaction"
+                        "Value": "dev"
                     },
                     {
                         "Key": "glb-core-project",
