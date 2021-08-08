@@ -1,20 +1,20 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "Email Notifications of SNS",
+    "Description": "SNS Email Bucket Creation Notifications of S3",
     "Parameters": {
         "SnsDisplayName": {
             "Type": "String",
-            "Default": "Notification of SNS",
+            "Default": "Bucket Creation of s3",
             "Description": "Enter sns display name"
         },
-        "SnsTopicName": {
+        "SnsTopicNames3": {
             "Type": "String",
-            "Default": "sns-core-sns-alarm",
+            "Default": "sns-caspia-bh-dev-s3-alarm-01",
             "Description": "Enter sns topic name "
         },
-        "SnsSubscriber": {
+        "SnsSubscriber1": {
             "Type": "String",
-            "Default": "naralamalli@gmail.com",
+            "Default": "kp01vasantharani@gmail.com",
             "Description": "Enter email address to be notified"
         },
         "SnsProtocol": {
@@ -24,7 +24,7 @@
         }
     },
     "Resources": {
-        "snsdev": {
+        "SNSS3": {
             "Type": "AWS::SNS::Topic",
             "Properties": {
                 "DisplayName": {
@@ -33,24 +33,11 @@
                 "Subscription": [
                     {
                         "Endpoint": {
-                            "Ref": "SnsSubscriber"
+                            "Ref": "SnsSubscriber1"
                         },
                         "Protocol": {
                             "Ref": "SnsProtocol"
                         }
-                    }
-                ],
-                "TopicName": {
-                    "Ref": "SnsTopicName"
-                },
-                "Tags": [
-                    {
-                        "Key": "caspia-core-env",
-                        "Value": "qa"
-                    },
-                    {
-                        "Key": "caspia-core-project",
-                        "Value": "dev"
                     }
                 ]
             }
