@@ -1,33 +1,42 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Resources": {
-        "s3": {
-            "Type": "AWS::CloudFormation::Stack",
-            "Properties": {
-                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json",
-                "TimeoutInMinutes": "60"
-            }
+    "Parameters": {
+        "Email": {
+            "Type": "String",
+            "Description": "Enter email address"
         },
-        "sns": {
-            "Type": "AWS::CloudFormation::Stack",
-            "Properties": {
-                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
+        "Resources": {
+            "s3": {
+                "Type": "AWS::CloudFormation::Stack",
+                "Properties": {
+                    "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json",
+                    "TimeoutInMinutes": "60"
+                }
+            },
+            "sns": {
+                "Type": "AWS::CloudFormation::Stack",
+                "Properties": {
+                    "Parameters": {
+                        "SnsSubscriber1": {
+                            "Ref": "Email"
+                        }
+                    },
+                    "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
+                }
+            },
+            "Outputs": {
+                "StackRef": {
+                    "Value": {
+                        "Ref": "s3"
+                    }
+                },
+                "OutputFromNestedStack": {
+                    "Value": {
+                        "Fn::GetAtt": [
+                            "s3",
+                            "Outputs.BucketName"
+                        ]
+                    }
+                }
             }
         }
-    },
-    "Outputs": {
-        "StackRef": {
-            "Value": {
-                "Ref": "s3"
-            }
-        },
-        "OutputFromNestedStack": {
-            "Value": {
-                "Fn::GetAtt": [
-                    "s3",
-                    "Outputs.BucketName"
-                ]
-            }
-        }
-    }
-}
