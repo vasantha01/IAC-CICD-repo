@@ -18,10 +18,10 @@
         "sns": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
+                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json",
                 "Parameters": {
                     "Ref": "SnsSubscriber1"
-                },
-                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
+                }
             }
         }
     },
