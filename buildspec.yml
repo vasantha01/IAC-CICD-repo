@@ -1,20 +1,7 @@
-version: 0.2
-environment_variables: 
-  plaintext: 
-    CHILD_TEMPLATES: |
-        sns.json
-        s3.json
+version: 0.1
+
 phases:
   build:
-    commands:
-      - echo "Copying child stack templates toS3"
-       - |
-        file = "CHILD_TEMPLATES"
-        if [ "$file" == "cfn-nested/*" ]
-        then
-              aws s3 cp $file s3://code-build-input-bucket1/*
-              aws codepipeline start-pipeline-execution --name Iac-pipeline
-        else
-        echo "demo on cid" 
-        fi
-        
+    commands: |
+        aws s3 cp cfn-nested s3://s3bucket-poc1/ --recursive --include "*.json"
+        echo "copy child stack templates to s3 "
