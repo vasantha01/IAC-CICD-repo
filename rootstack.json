@@ -1,17 +1,25 @@
 {
-  "AWSTemplateFormatVersion" : "2010-09-09",
-  "Resources" : {
-      "S3CompactionBucket" : {
-      "Type" : "AWS::CloudFormation::Stack",
-      "Properties" : {
-          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/s3.json"
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Resources": {
+        "S3CompactionBucket": {
+            "Type": "AWS::CloudFormation::Stack",
+            "Properties": {
+                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json",
+                "Parameters": {
+                    "SharedValueParameter": {
+                        "Fn::GetAtt": [
+                            "S3CompactionBucket",
+                            "Outputs.S3CompactionBucket"
+                        ]
+                    }
+                }
+            }
         }
-     },
-      "sns" : {
-      "Type" : "AWS::CloudFormation::Stack",
-      "Properties" : {
-          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
+    },
+    "sns": {
+        "Type": "AWS::CloudFormation::Stack",
+        "Properties": {
+            "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
         }
-      }
     }
 }
