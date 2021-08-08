@@ -1,10 +1,10 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Parameters": {
-        "SnsSubscriber1": {
+        "CompactionBucket": {
             "Type": "String",
-            "Default": "kp01vasantharani@gmail.com",
-            "Description": "Enter email address to be notified"
+            "Default": "compactios3bucket",
+            "Description": "Enter Prism Bucket Name"
         }
     },
     "Resources": {
@@ -12,16 +12,16 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json",
+                "Parameters": {
+                    "Ref": "CompactionBucket"
+                }
                 "TimeoutInMinutes": "60"
             }
         },
         "sns": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
-                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json",
-                "Parameters": {
-                    "Ref": "SnsSubscriber1"
-                }
+                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"    
             }
         }
     },
