@@ -47,9 +47,9 @@
         }
     },
     "Outputs": {
-        "BucketName": {
+        "TopicName": {
             "Value": {
-                "Ref": "TopicName"
+                "Ref": "SnsTopicName"
             }
         }
     }
