@@ -30,6 +30,9 @@
                 "DisplayName": {
                     "Ref": "SnsDisplayName"
                 },
+                "TopicName":{
+                    "Ref":"SnsTopicName"
+                },
                 "Subscription": [
                     {
                         "Endpoint": {
@@ -40,6 +43,13 @@
                         }
                     }
                 ]
+            }
+        }
+    },
+    "Outputs": {
+        "BucketName": {
+            "Value": {
+                "Ref": "TopicName"
             }
         }
     }
