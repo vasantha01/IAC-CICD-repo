@@ -8,7 +8,7 @@
                 "Parameters": {
                 "SharedValueParameter": {
                  "Fn::GetAtt": [
-                 "NestedStackA",
+                 "s3",
                  "Outputs.SharedValueOutput"
             ]
           }
