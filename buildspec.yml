@@ -4,4 +4,4 @@ phases:
   build:
     commands: |
         aws s3 cp cfn-nested s3://s3bucket-poc1/ --recursive --include "*.json"
-        echo "copy child  stack templates to s3 "
+        echo "copy child stack templates to s3 "
