@@ -1,30 +1,32 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Resources": {
-        "S3CompactionBucket": {
+        "s3": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json"
-            },
-            "Outputs": {
-                "StackRef": {
-                    "Value": {
-                        "Ref": "S3CompactionBucket"
-                    },
-                    "OutputFromNestedSatck": {
-                        "Value": {
-                            "Ref": "S3CompactionBucket.Outputs.BucketName"
-                        }
-                    }
-                }
             },
             "sns": {
                 "Type": "AWS::CloudFormation::Stack",
                 "Properties": {
                     "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
                 }
+            },
+            "Outputs": {
+                "StackRef": {
+                    "Value": {
+                        "Ref": "s3"
+                    }
+                },
+                "OutputFromNestedStack": {
+                    "Value": {
+                        "Fn::GetAtt": [
+                            "s3",
+                            "Outputs.BucketName"
+                        ]
+                    }
+                }
             }
         }
     }
 }
-
