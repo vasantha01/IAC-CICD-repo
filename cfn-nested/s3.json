@@ -1,20 +1,56 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "bucketcicd-caspia",
+    "Description": "S3-Core-Prsm-BucketCreation",
     "Parameters": {
-        "bucketcicd": {
+        "CompactionBucket": {
             "Type": "String",
-            "Default": "bucket-cicd",
-            "Description": "Enter Capsia Bucket Name"
+            "Default": "compactios3bucket",
+            "Description": "Enter Prism Bucket Name"
         }
     },
     "Resources": {
-        "S3Bucket": {
+        "S3CompactionBucket": {
             "Type": "AWS::S3::Bucket",
             "Properties": {
                 "BucketName": {
-                    "Ref": "bucketcicd"
-                }
+                    "Ref": "CompactionBucket"
+                },
+                "PublicAccessBlockConfiguration": {
+                    "BlockPublicAcls": true,
+                    "BlockPublicPolicy": true,
+                    "IgnorePublicAcls": true,
+                    "RestrictPublicBuckets": true
+                },
+                "BucketEncryption": {
+                    "ServerSideEncryptionConfiguration": [
+                        {
+                            "ServerSideEncryptionByDefault": {
+                                "SSEAlgorithm": "AES256"
+                            }
+                        }
+                    ]
+                },
+                "AccessControl": "Private",
+                "VersioningConfiguration": {
+                    "Status": "Enabled"
+                },
+                "Tags": [
+                    {
+                        "Key": "glb-core-env",
+                        "Value": "compaction"
+                    },
+                    {
+                        "Key": "glb-core-project",
+                        "Value": "casipa"
+                    }
+                ]
+            }
+        }
+    },
+    "Outputs": {
+        "CompactionBucket": {
+            "Value": {
+                "Ref": "S3CompactionBucket"
             }
         }
     }
