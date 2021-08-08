@@ -1,29 +1,27 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Parameters": {
-        "Email": {
+        "SnsSubscriber1": {
             "Type": "String",
-            "Default": "sns-caspia-bh-dev-s3-alarm-01",
-            "Description": "Enter email address"
-        }
-    },
-    "Resources": {
-        "s3": {
-            "Type": "AWS::CloudFormation::Stack",
-            "Properties": {
-                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json",
-                "TimeoutInMinutes": "60"
-            }
+            "Default": "kp01vasantharani@gmail.com",
+            "Description": "Enter email address to be notified"
         },
-        "sns": {
-            "Type": "AWS::CloudFormation::Stack",
-            "Properties": {
-                "Parameters": {
-                    "SnsSubscriber1": {
-                        "Ref": "Email"
-                    }
-                },
-                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
+        "Resources": {
+            "s3": {
+                "Type": "AWS::CloudFormation::Stack",
+                "Properties": {
+                    "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json",
+                    "TimeoutInMinutes": "60"
+                }
+            },
+            "sns": {
+                "Type": "AWS::CloudFormation::Stack",
+                "Properties": {
+                    "Parameters": {
+                        "Ref": "SnsSubscriber1"
+                    },
+                    "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
+                }
             }
         }
     },
