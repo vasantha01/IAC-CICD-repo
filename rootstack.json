@@ -4,13 +4,13 @@
       "S3CompactionBucket" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Properties" : {
-          "TemplateURL" : "https://code-build-input-bucket1.s3.amazonaws.com/Buckets3.json"
+          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
         }
      },
       "sns" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Properties" : {
-          "TemplateURL" : "https://code-build-input-bucket1.s3.amazonaws.com/sns.json"
+          "TemplateURL" : "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
         }
       }
     }
