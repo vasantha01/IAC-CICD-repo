@@ -3,6 +3,7 @@
     "Parameters": {
         "Email": {
             "Type": "String",
+            "Default": "sns-caspia-bh-dev-s3-alarm-01",
             "Description": "Enter email address"
         }
     },
