@@ -1,10 +1,10 @@
 {
   "AWSTemplateFormatVersion" : "2010-09-09",
   "Resources" : {
-      "s3" : {
+      "S3CompactionBucket" : {
       "Type" : "AWS::CloudFormation::Stack",
       "Properties" : {
-          "TemplateURL" : "https://code-build-input-bucket1.s3.amazonaws.com/s3.json"
+          "TemplateURL" : "https://code-build-input-bucket1.s3.amazonaws.com/Buckets3.json"
         }
      },
       "sns" : {
