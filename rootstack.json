@@ -3,6 +3,7 @@
     "Parameters": {
         "CompactionBucket": {
             "Type": "String",
+            "Default": "compactios3bucket",
             "Description": "Enter Prism Bucket Name"
         }
     },
