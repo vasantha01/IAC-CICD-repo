@@ -1,5 +1,12 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
+    "Parameters": {
+        "S3CompactionBucket": {
+            "Type": "String",
+            "Default": "compactios3bucket",
+            "Description": "Enter Prism Bucket Name"
+        }
+    },
     "Resources": {
         "s3": {
             "Type": "AWS::CloudFormation::Stack",
@@ -10,6 +17,9 @@
         "sns": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
+                "CompactionBucket": {
+                    "Ref": "S3CompactionBucket"
+                },
                 "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
             }
         }
