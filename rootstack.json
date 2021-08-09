@@ -1,10 +1,10 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Parameters": {
-        "S3CompactionBucket": {
+    "TopicName": {
             "Type": "String",
-            "Default": "compactios3bucket",
-            "Description": "Enter Prism Bucket Name"
+            "Default": "sns-caspia-bh-dev-s3-alarm-01",
+            "Description": "Enter sns topic name "
         }
     },
     "Resources": {
@@ -12,17 +12,17 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json"
-            },
-            "Parameters": {
-                "CompactionBucket": {
-                    "Ref": "S3CompactionBucket"
-                }
-            }
+            }   
         },
         "sns": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
+            },
+                "Parameters": {
+                "SnsTopicName": {
+                    "Ref": "TopicName"
+                }
             }
         }
     },
