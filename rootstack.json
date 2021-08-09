@@ -1,7 +1,7 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Parameters": {
-    "TopicName": {
+        "TopicName": {
             "Type": "String",
             "Default": "sns-caspia-bh-dev-s3-alarm-01",
             "Description": "Enter sns topic name "
@@ -12,16 +12,16 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json"
-            }   
+            }
         },
         "sns": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
-                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
-            },
+                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json",
                 "Parameters": {
-                "SnsTopicName": {
-                    "Ref": "TopicName"
+                    "SnsTopicName": {
+                        "Ref": "TopicName"
+                    }
                 }
             }
         }
