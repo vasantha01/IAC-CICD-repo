@@ -14,31 +14,31 @@
                 "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json",
                 "Parameters": {
                     "BucketName": {
-                        "Ref": "S3CompactionBucket"
-                    }
-                },
-                "TimeoutInMinutes": "60"
+                        "Ref": "CompactionBucket"
+                    },
+                    "TimeoutInMinutes": "60"
+                }
+            },
+            "sns": {
+                "Type": "AWS::CloudFormation::Stack",
+                "Properties": {
+                    "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
+                }
             }
         },
-        "sns": {
-            "Type": "AWS::CloudFormation::Stack",
-            "Properties": {
-                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"    
-            }
-        }
-    },
-    "Outputs": {
-        "StackRef": {
-            "Value": {
-                "Ref": "s3"
-            }
-        },
-        "OutputFromNestedStack": {
-            "Value": {
-                "Fn::GetAtt": [
-                    "s3",
-                    "Outputs.BucketName"
-                ]
+        "Outputs": {
+            "StackRef": {
+                "Value": {
+                    "Ref": "s3"
+                }
+            },
+            "OutputFromNestedStack": {
+                "Value": {
+                    "Fn::GetAtt": [
+                        "s3",
+                        "Outputs.BucketName"
+                    ]
+                }
             }
         }
     }
