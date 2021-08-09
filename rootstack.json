@@ -5,12 +5,12 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json"
-            },
-            "sns": {
-                "Type": "AWS::CloudFormation::Stack",
-                "Properties": {
-                    "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
-                }
+            }
+        },
+        "sns": {
+            "Type": "AWS::CloudFormation::Stack",
+            "Properties": {
+                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
             }
         }
     },
