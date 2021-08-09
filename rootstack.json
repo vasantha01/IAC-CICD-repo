@@ -13,7 +13,9 @@
             "Properties": {
                 "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json",
                 "Parameters": {
-                    "Ref": "CompactionBucket"
+                    "BucketName": {
+                        "Ref": "CompactionBucket"
+                    }
                 },
                 "TimeoutInMinutes": "60"
             }
