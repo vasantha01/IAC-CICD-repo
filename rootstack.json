@@ -12,14 +12,14 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json"
+            },
+            "CompactionBucket": {
+                "Ref": "S3CompactionBucket"
             }
         },
         "sns": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
-                "CompactionBucket": {
-                    "Ref": "S3CompactionBucket"
-                },
                 "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json"
             }
         }
