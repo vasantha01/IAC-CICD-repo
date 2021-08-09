@@ -13,7 +13,7 @@
             "Properties": {
                 "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json"
             },
-            "CompactionBucket": {
+            "Parameters": {
                 "Ref": "S3CompactionBucket"
             }
         },
