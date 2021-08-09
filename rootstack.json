@@ -5,6 +5,11 @@
             "Type": "String",
             "Default": "sns-caspia-bh-dev-s3-alarm-01",
             "Description": "Enter sns topic name "
+        },
+        "Subscriber1": {
+            "Type": "String",
+            "Default": "kp01vasantharani@gmail.com",
+            "Description": "Enter email address to be notified"
         }
     },
     "Resources": {
@@ -21,6 +26,9 @@
                 "Parameters": {
                     "SnsTopicName": {
                         "Ref": "TopicName"
+                    },
+                    "SnsSubscriber1": {
+                        "Ref": "Subscriber1"
                     }
                 }
             }
