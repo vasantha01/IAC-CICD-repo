@@ -3,7 +3,7 @@
     "Parameters": {
         "TopicName": {
             "Type": "String",
-            "Default": "sns-caspia-bh-dev-s3-alarm-01",
+            "Default": "sns-caspia-bh-dev-s3-alarm-0",
             "Description": "Enter sns topic name "
         },
         "Subscriber1": {
