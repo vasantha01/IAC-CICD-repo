@@ -16,13 +16,13 @@
         "s3": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
-                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/s3.json"
+                "TemplateURL": "https://iac-source-buckets3.amazonaws.com/s3.json"
             }
         },
         "sns": {
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
-                "TemplateURL": "https://s3bucket-poc1.s3.amazonaws.com/sns.json",
+                "TemplateURL": "https://iac-source-bucket.s3.amazonaws.com/sns.json",
                 "Parameters": {
                     "SnsTopicName": {
                         "Ref": "TopicName"
