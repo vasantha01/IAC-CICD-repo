@@ -5,4 +5,5 @@ phases:
     commands: |
         aws s3 cp cfn-nested s3://iac-source-bucket/ --recursive --include "*.json"
         echo "copy child stack templates to s3 "
-
+        aws s3 cp s3://iac-source-bucket/ s3://artifactbucket-cicd/ 
+        echo "copy artifacts to cross account s3 "
