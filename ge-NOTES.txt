@@ -1,0 +1,12 @@
+503983346536.dkr.ecr.us-east-1.amazonaws.com/repo-new1:22
+
+
+503983346536.dkr.ecr.us-east-1.amazonaws.com/
+
+greenpulum DB migrating AWS Redshift 
+
+amazon deliviry part
+
+infra 
+
+talent tool pushing data green pulum  aws redshift 

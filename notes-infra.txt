@@ -1,0 +1,107 @@
+public  -- 
+private--
+
+DNS- 
+Increase of size of server--horizontal scaling
+adding   the server--vertical scaling
+---------------------------------------
+
+Load Balancer-
+
+diving the load equally and route the taffic is called load balancer
+------------------------------
+EBS
+
+internal storage
+
+
+external storage
+Adding exteranl volume adding ebs volume
+by default is root volume
+
+IOPS
+For every 200 iops 
+
+1gb=300 iops
+ebs used for storage
+
+using snapshot copy the data from ebs volumes create a new volume and attach a volume to new ec2
+-------------------------------------------------------------
+
+using AMI we can spin up new instance also have an option to attach volume
+ami can take backup of ebs volumes also
+---------------------------------
+Monitoring 
+
+
+ASG-Auto scaling group
+
+min and max 
+atleast maintain 1 or 2 instances and max as 20 instances
+based on threshold add or remove instances cpu utili
+
+create an  cloud watch alarm --monitor the instances and notify
+1) Launch Configuration
+2) min max
+3) threshold <> 60 
+4) cloud watch alarm
+5) ASG will be scaleup or scaledown
+
+--------------------------------------------
+cloudwatch helps to mointor -- if it cross 90% watches 
+cloudwatch gives instructions to add an server -- asg take ami and add it to loadbalancer
+-
+
+1)whenever there is increase in traffic cloudwatches identifies  cpu utilization 90 CW triiger ASG -ASG Through LC takes  an AMI  and too LOAD Balancer
+2)CW notifiy SNS and notify to ASG add an instance
+
+
+CLOUD WATCH
+|
+ASG
+|
+LC
+AMI
+|
+LOAD BALANCER
+-------------------------------------
+
+stickey session
+user will have history of there session 23:05 06-06-20214
+
+-----------------------------------------
+GIT
+
+
+feature branch---
+release branch
+master branch
+
+TAG used for to lock a developer not deploy code
+
+TAG of  your branch /release branch --no one can commit -readonly- immupatb'
+
+S3---
+Storage classess
+
+Default -Standard storage-- downloads and uploads -- gives a less coast 0.005 $ --100 high availavbity
+
+Infrequentenly access storage--- downloads and uploads accessing infrequently--price is low than standard
+
+Reduced redudancy data-- getting it highly available --risk in loosing data--- price is low
+
+glacier---archival data-- for uploads n download take time--- highly available-- price is too low
+
+
+S3 Cross-Region Replication (CRR) is used to copy objects across Amazon S3 buckets in different AWS Regions. 
+
+
+
+
+
+
+
+
+
+
+

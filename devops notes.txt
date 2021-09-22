@@ -1,0 +1,4 @@
+application ,docker file
+docker build 
+push ecr
+update task
