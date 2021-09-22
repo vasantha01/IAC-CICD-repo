@@ -1,0 +1,156 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: 'CICD: This cloudformation template download the code from github webhook and put it into an S3 bucket.'
+Parameters:
+  GithubToken:
+    Description: GitHub API Token used for Status creation.
+    Type: String
+    Default: 8f41b3464a4f5ff810ee8d7a392fd4458f88f99f
+    NoEcho : true
+  ProjectName:
+    AllowedPattern: "^[a-zA-Z0-9-_]*$"
+    Description: Name to give the CodeBuild Project.
+    MaxLength: '255'
+    MinLength: '2'
+    Type: String
+  RepositoryUrl:
+    Description: 'HTTPS Clone URL of the repository in GitHub. Example: ''https://github.build.ge.com/<ORG>/repo.git'''
+    Type: String
+    Default: https://github.build.ge.com/BH-CASPIA-CICD/BH-CASPIA-IAC.git
+  PipelineartifactsBucketName:
+    Type: String
+    Description: Bucket name for the codepipeline source
+    Default: 040138105032-us-east-1-cicd-src
+  ArtifactFile:
+    Description: Name of the Artifact File uploaded to S3
+    Type: String
+    Default: BH-CASPIA-IAC.zip
+  AppName:
+    Description:  (Required) Enter Application Name.
+    Type: String
+    AllowedPattern: "[^\\s]+"
+    ConstraintDescription: "application name tag min 3 and max 50 characters"
+    MinLength: 3
+    MaxLength: 50
+  UAI:
+    Description:  (Required) Enter ServiceNow ID.
+    Type: String
+    AllowedPattern: "[^\\s]+"
+    ConstraintDescription: " uai tag min 3 and max 50 characters"
+    MinLength: 3
+    MaxLength: 50
+    Default: "uai111111"
+  Env:
+    Description: Enter the environment for application. (Required)
+    Type: String
+    AllowedValues:
+      - dev
+      - qa
+      - prod
+    Default: "dev"
+  SGiD:
+    Description: SecurityGroupId
+    Type: AWS::SSM::Parameter::Value<String>
+    Default: /org/member/default_sg_id
+Resources:
+  VPCLookup:
+   Type: Custom::VPCLookup
+   Properties:
+     ServiceToken: !Join
+        - ':'
+        - - 'arn:aws:lambda'
+          - !Ref AWS::Region
+          - !Ref AWS::AccountId
+          - 'VPCLookup'
+
+  ResolveCICDKMS:
+    Type: Custom::get-kms-arn
+    Properties:
+      ServiceToken: !Join
+        - ':'
+        - - 'arn:aws:lambda'
+          - !Ref AWS::Region
+          - !Ref AWS::AccountId
+          - 'get-kms-arn'
+      KeyAlias: 'alias/cicd-kmskey'
+
+  CodeBuildSourceCredential:
+   Type: AWS::CodeBuild::SourceCredential
+   Properties:
+     AuthType: PERSONAL_ACCESS_TOKEN
+     ServerType: GITHUB_ENTERPRISE
+     Token: !Ref GithubToken
+
+  GithubCodeBuildProject:
+    Type: AWS::CodeBuild::Project
+    Properties:
+      Name:
+        Ref: ProjectName
+      Artifacts:
+        Name: !Sub "${ArtifactFile}"
+        Type: S3
+        Location:
+          Ref: PipelineartifactsBucketName
+        Packaging: ZIP
+      ServiceRole: !Sub arn:aws:iam::${AWS::AccountId}:role/CICD-CodeBuildService-Role
+      VpcConfig:
+        SecurityGroupIds: !Split [",", !Ref SGiD]
+        Subnets:
+          - !Select [ "0", !GetAtt VPCLookup.VPCSubnets]
+          - !Select [ "1", !GetAtt VPCLookup.VPCSubnets]
+        VpcId: !GetAtt VPCLookup.VPCId
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/standard:3.0
+      Source:
+        Auth:
+          Type: OAUTH
+          Resource: !Ref CodeBuildSourceCredential
+        Type: GITHUB_ENTERPRISE
+        Location: !Ref RepositoryUrl
+        BuildSpec: |
+          version: 0.2
+          phases:
+            build:
+              commands:
+                - echo Uploading Artifacts to S3
+          artifacts:
+            files:
+              - '**/*'
+      Triggers:
+        Webhook: false
+  CreateWebhook:
+    Type: 'AWS::CodeBuild::Project'
+    Properties:
+      Name: !Sub CreateWebhook-${ProjectName}
+      Description: Webhook to trigger builds
+      ServiceRole: !Sub arn:aws:iam::${AWS::AccountId}:role/CICD-CodeBuildService-Role
+      EncryptionKey: !Sub arn:aws:kms:${AWS::Region}:${AWS::AccountId}:key/${ResolveCICDKMS.key_id}
+      Artifacts:
+        Type: NO_ARTIFACTS
+      Environment:
+        Type: LINUX_CONTAINER
+        ComputeType: BUILD_GENERAL1_SMALL
+        Image: aws/codebuild/standard:3.0
+        EnvironmentVariables:
+          - Value: !Ref GithubCodeBuildProject
+            Name: 'PrjName'
+      Source:
+        Type: NO_SOURCE
+        BuildSpec: |
+          version: 0.2
+          env:
+            shell: bash
+          phases:
+              install:
+                  commands:
+                      - aws --version
+              build:
+                  commands:
+                    - > 
+                      aws codebuild create-webhook --project-name $PrjName \
+      TimeoutInMinutes: 10
+Outputs:
+  CodeBuildProject:
+    Description: CodeBuild Project triggered by GitHub
+    Value: !Ref GithubCodeBuildProject
